@@ -2,7 +2,7 @@
 
 **Gruppenummer:** gruppe 1
 
-**Arbejdstitel:**
+**Arbejdstitel:** øvelses arbejde
 
 **Gruppens fork:** https://github.com/BRUGERNAVN/diversitetsbarometer
 
