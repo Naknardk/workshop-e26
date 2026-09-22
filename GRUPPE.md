@@ -27,8 +27,4 @@
 - Vi pusher, før vi går
 - To sidder aldrig i den samme fil på samme tid. Vi aftaler i Issues, hvem der tager hvad
 
-<<<<<<< HEAD
 naknar og jeg bruger windows
-=======
-Patriciaskovhus jeg bruger google 
->>>>>>> d9b5220b7b0533f5dd488c944b60ac7c522b1727
