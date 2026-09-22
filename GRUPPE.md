@@ -2,6 +2,7 @@
 
 **Gruppenummer:** gruppe 1
 
+**Arbejdstitel:** Når kun en kan vinde
 **Arbejdstitel:** øvelses arbejde
 
 **Gruppens fork:** https://github.com/BRUGERNAVN/diversitetsbarometer
