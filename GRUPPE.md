@@ -1,6 +1,6 @@
 # Gruppe
 
-**Gruppenummer:**
+**Gruppenummer:** gruppe 1
 
 **Arbejdstitel:**
 
@@ -14,7 +14,9 @@
 <!-- Skriv GitHub-brugernavn — ikke fulde navn, hvis I hellere vil være fri. -->
 
 | GitHub-brugernavn | Studieretning |
-|---|---|
+|Naknardk|Bid|
+|Patriciaskovhus|BID|
+|Vjolabytyqi|BID|
 
 ## Aftaler
 
