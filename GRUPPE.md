@@ -16,6 +16,7 @@
 | GitHub-brugernavn | Studieretning |
 |Naknardk|Bid|
 |Patriciaskovhus|BID|
+|Vjolabytyqi|BID|
 
 ## Aftaler
 
