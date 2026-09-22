@@ -1,6 +1,6 @@
 # Gruppe
 
-**Gruppenummer:**
+**Gruppenummer:** gruppe 1
 
 **Arbejdstitel:**
 
