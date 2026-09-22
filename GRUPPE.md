@@ -14,7 +14,7 @@
 <!-- Skriv GitHub-brugernavn — ikke fulde navn, hvis I hellere vil være fri. -->
 
 | GitHub-brugernavn | Studieretning |
-|---|---|
+|Naknardk|Bid|
 
 ## Aftaler
 
