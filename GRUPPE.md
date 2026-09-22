@@ -27,3 +27,4 @@
 - Vi pusher, før vi går
 - To sidder aldrig i den samme fil på samme tid. Vi aftaler i Issues, hvem der tager hvad
 
+Patriciaskovhus jeg bruger google 
