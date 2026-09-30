@@ -54,9 +54,20 @@ Skal ikke fortælle kausalitet, brugeren skal selv forholde sig til dataen
 |---|---|---|---|
 | `Arbejdsplads` | antal ansatte og antal i hver gruppe, branche, sektor, region | regne sine andele ud, sige fra ved ugyldige tal | — |
 
-## Når tallene mangler
+Hvad skal vores barometer bruge:
+| Kvinder |andelen af kvinder i virksomheder i forskellige brancher osv. | Kan | Bruger |
+ mænd|andelen af mænd i virksomheder i forskellige brancher osv. 
+ etnicitet |andelen af etnicitet i virksomheder i forskellige brancher osv. 
 
+ løn for Kvinder |løn for kvinder i virksomheder i forskellige brancher osv. 
+ løn for mænd |løn for mænd i virksomheder i forskellige brancher osv. 
+
+
+## Når tallene mangler
+ 
 <!-- Trin 4. Hvorfor mangler nogle kombinationer i referencetallene? Hvad gør barometeret så og hvordan får brugeren det at vide? -->
+
+
 
 ## Hvorfor ingen samlet score
 
