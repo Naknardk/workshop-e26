@@ -17,7 +17,7 @@ Virker `pip` ikke, så prøv `pip3` eller `python3 -m pip`.
 **2: Stå i roden af repositoriet.** Ikke inde i `app/`:
 
 ```bash
-cd sti/til/diversitetsbarometer
+cd sti/til/workshop-e26
 ```
 
 Tjek med `ls`: I skal kunne se mapperne `app`, `data` og `tests`.
