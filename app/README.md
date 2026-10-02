@@ -61,5 +61,5 @@ def svar():
     return ui.div(*[ui.p(linje) for linje in vurder(arbejdsplads(), referencetal)])
 ```
 
-Det er hele koblingen mellem brugerfladen og jeres egen kode. Skal barometeret svare
+Det er hele koblingen mellem bruger-/grænsefladen og jeres egen kode. Skal barometeret svare
 noget andet, retter I i `barometer/` og ikke i `app.py`.
