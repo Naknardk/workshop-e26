@@ -22,7 +22,7 @@ cd sti/til/workshop-e26
 
 Tjek med `ls`: I skal kunne se mapperne `app`, `data` og `tests`.
 
-**3: Start appen:**
+**3: Start appen fra terminal (enten inde i VScode eller terminal på com.):**
 
 ```bash
 python -m shiny run --reload app/app.py
