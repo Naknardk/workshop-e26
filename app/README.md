@@ -25,7 +25,7 @@ Tjek med `ls`: I skal kunne se mapperne `app`, `data` og `tests`.
 **3: Start appen:**
 
 ```bash
-shiny run --reload app/app.py
+python -m shiny run --reload app/app.py
 ```
 
 `--reload` betyder, at appen starter forfra af sig selv, hver gang I gemmer en fil.
