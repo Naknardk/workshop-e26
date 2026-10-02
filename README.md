@@ -1,95 +1,90 @@
-# Diversitetsbarometeret
+# Data
 
-Hvor mangfoldig er din arbejdsplads?
+Referencetallene, delt op i tabeller som i en database. **Tallene er syntetiske** 
+(opdigtede), så vi kan bygge barometeret, før de rigtige aggregater fra Danmarks
+Statistik ligger klar. Strukturen er den rigtige. Det er kun værdierne, der ikke er.
 
-I dette miniprojekt bygger I et online barometer, hvor en arbejdsplads kan taste sine
-egne tal ind og se, hvor den ligger i forhold til sammenlignelige arbejdspladser i
-Danmark. Barometeret skal også fungere som et almindeligt opslagsværktøj for alle, der
-vil vide, hvordan køn, alder og herkomst er fordelt på tværs af brancher, regioner og
-størrelser.
+Når de rigtige tal kommer, får de de samme kolonnenavne. Så virker jeres kode videre.
 
-Projektet bygger på rapporten *Mod diversitet på arbejdspladsen* (Qvist & Larsen).
-Barometeret er ikke et selvstændigt produkt, men en måde at gøre rapportens
-resultater brugbare for den enkelte arbejdsplads.
+## Tabellerne
 
-## Hvad barometeret skal kunne
+| Fil | Hvad den indeholder | Rækker |
+|---|---|---|
+| `brancher.csv` | `branche_id`, `branche` | 9 |
+| `regioner.csv` | `region_id`, `region` | 6 |
+| `sektorer.csv` | `sektor_id`, `sektor` | 3 |
+| `stoerrelser.csv` | `stoerrelse_id`, `stoerrelse`, `min_ansatte`, `max_ansatte` | 5 |
+| `dimensioner.csv` | `dimension_id`, `dimension`, `navn`, `beskrivelse` | 3 |
+| `grupper.csv` | én række pr. sammenligningsgruppe: de fem id'er, `aar`, `antal_arbejdssteder` | 224 |
+| `fordelinger.csv` | én række pr. gruppe **og** dimension: `p10` til `p90` | 672 |
+| `metadata.csv` | oplysninger om datasættet selv | 7 |
 
-**1. Sammenlign din arbejdsplads.** Brugeren angiver branche, antal ansatte, sektor og
-region, og derefter arbejdspladsens andel af kvinder, seniorer og medarbejdere med
-indvandrerbaggrund. Barometeret svarer med, hvor arbejdspladsen ligger i fordelingen
-blandt de sammenlignelige — ikke blandt alle.
+```mermaid
+erDiagram
+    grupper ||--o{ fordelinger : har
+    brancher ||--o{ grupper : "branche_id"
+    regioner ||--o{ grupper : "region_id"
+    sektorer ||--o{ grupper : "sektor_id"
+    stoerrelser ||--o{ grupper : "stoerrelse_id"
+    dimensioner ||--o{ fordelinger : "dimension_id"
+```
 
-**2. Slå op.** Uden at taste noget ind skal man kunne se, hvordan de tre andele
-fordeler sig i en given branche, region eller størrelsesgruppe.
+De små tabeller kaldes **opslagstabeller**. De findes, så ordet "Undervisning" kun
+står ét sted. Skal det staves om, rettes det ét sted og ikke 672.
 
-## Definitioner
+## Id 0 betyder "Alle"
 
-Barometeret bruger rapportens definitioner, så tallene kan sammenlignes:
+I `brancher`, `regioner`, `sektorer` og `stoerrelser` er række 0 værdien `Alle`.
+Det er sådan, en bredere sammenligningsgruppe bliver mulig: findes den præcise
+kombination ikke, slår man op med `sektor_id = 0`, og derefter med
+`stoerrelse_id = 0` også.
 
-| Begreb | Definition |
-|---|---|
-| Stilling | Et *novemberjob*: det job, en person har sidste arbejdsdag i november (Danmarks Statistik) |
-| Senior | 55 år eller derover |
-| Indvandrerbaggrund | Indvandrere og efterkommere efter Danmarks Statistiks definition |
-| Branche | Danmarks Statistiks branchekode DB07 |
-| Periode | 2012 til 2022 |
+## Det, der ikke findes
 
-## Data
+Lige så vigtigt som det, der er med:
 
-I får **ikke** oplysninger om de enkelte arbejdspladser. Rapporten bygger på
-registerdata fra Danmarks Statistik, og den slags data må ikke forlade Danmarks
-Statistiks forskningsmaskiner. Det, der kommer til at ligge i `data/`, er aggregerede
-tal (fordelinger for grupper af arbejdspladser) der er gjort så grove, at ingen
-enkelt arbejdsplads kan genkendes i dem.
+- **Ingen løn.** Rapporten måler ikke løn. Et barometer kan ikke svare på noget, der ikke står i tallene.
+- **Ingen kommuner.** Kun regioner. Kommuner ville give så små grupper, at enkelte arbejdspladser kunne genkendes.
+- **Ingen navne, CVR-numre eller adresser.** Datasættet indeholder ingen enkelte arbejdspladser overhovedet, kun fordelinger for grupper.
+- **Ingen detaljeret aldersfordeling.** Kun andelen på 55 år og derover, som i rapporten.
 
-Det er ikke en teknisk begrænsning, men en del af opgaven: et barometer, der kan
-bruges til at identificere enkelte arbejdspladser, er et dårligt barometer.
+## Nogle grupper mangler
 
-## Teknik
+28 ud af 128 mulige kombinationer af branche, størrelse og sektor er udeladt, fordi
+der ville være for få arbejdssteder i dem. Det er ikke en fejl i filen — det er sådan,
+offentliggjorte registerdata ser ud.
 
-- **Python** til al beregning
-- **Quarto** til hjemmesiden: forside, barometer, opslag og rapportens hovedfund
-- **GitHub Pages** til at publicere det hele
+Prøv for eksempel at slå *Industri, 50-99 ansatte, privat sektor* op i 2022. Den
+findes ikke. Jeres kode skal kunne klare det og falde tilbage til en bredere gruppe.
 
-Barometeret kommer til at køre direkte i browseren. Det betyder, at de tal, en
-arbejdsplads taster ind, aldrig bliver sendt nogen steder hen. De bliver på brugerens
-egen computer.
+## Sådan sætter I tabellerne sammen
 
-## Sådan kommer I i gang
+```python
+import pandas as pd
 
-### 1: Skriv dig ind som samarbejdspartner — hver for sig
+fordelinger = pd.read_csv("data/fordelinger.csv")
+grupper = pd.read_csv("data/grupper.csv")
+brancher = pd.read_csv("data/brancher.csv")
 
-1. **Fork** dette repository: *Fork* øverst til højre → *Create fork*.
-2. **Clone** *din egen fork* i VS Code.
-3. Kopiér `samarbejdspartnere/_skabelon.md` til `samarbejdspartnere/<dit-brugernavn>.md`.
-   Små bogstaver, ingen mellemrum, ingen æ, ø eller å.
-4. Udfyld filen, commit med en god besked, og push.
-5. På din fork på GitHub: *Contribute* → *Open pull request*.
+tal = (fordelinger
+       .merge(grupper, on="gruppe_id")
+       .merge(brancher, on="branche_id"))
+```
 
-Når din pull request er merget, står du på listen over samarbejdspartnere.
+`merge` sætter to tabeller sammen på en fælles kolonne. Det er den samme operation,
+der i en database hedder et **join**.
 
-### 2: Sæt gruppens projekt op i studiegruppen
+## Den flade udgave
 
-GitHub tillader kun én fork pr. konto. I har allerede hver jeres, så én af dem skal
-være gruppens.
+`data/afledt/referencetal.csv` er alle tabeller sat sammen til én. Den laves af
+`lav_fladt.py` og kan altid laves igen, hvorfor den ligger i `afledt/`.
 
-1. **Vælg, hvis fork der skal være gruppens.**
-2. Den person: gå til sin fork → *Sync fork* → *Update branch*. Nu er forken
-   identisk med originalen, med alle samarbejdspartnere.
-3. Samme person: *Settings* → *Collaborators* → tilføj resten af gruppen.
-4. **De andre:** slet jeres egen fork — *Settings* → *Delete this repository*. Den har
-   gjort sit arbejde, og så kan I ikke komme til at clone den forkerte.
-5. **De andre:** acceptér invitationen, der kommer på mail, og clone **gruppens fork**.
-6. Skriv jer ind i `GRUPPE.md` **én ad gangen**: pull, tilføj jeres linje, commit, push.
+Brug gerne den flade fil, mens I bygger noget, der skal virke i dag. Men lær at sætte
+tabellerne sammen selv: det er sådan, rigtige data kommer.
 
-Herfra sender I ikke pull requests tilbage til dette repository. Gruppens fork er
-jeres projekt, og det er den, I publicerer fra. Kommer der nyt her, fx
-referencetallene, henter I det med *Sync fork*.
+## Hvis I vil lave data om
 
-## Undervejs
-
-Barometeret bliver bygget i trin, der følger kurset. 
-
-## Kilde
-
-Qvist, J. F. & Larsen, C. A. *Mod diversitet på arbejdspladsen.*
+```bash
+python3 data/lav_syntetiske_data.py    # alle tabellerne
+python3 data/lav_fladt.py              # den flade udgave
+```
