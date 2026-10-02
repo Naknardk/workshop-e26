@@ -1,4 +1,4 @@
-# Appen
+lss# Appen
 
 Barometeret som en rigtig brugerflade, bygget med **Shiny for Python**.
 
@@ -25,7 +25,7 @@ Tjek med `ls`: I skal kunne se mapperne `app`, `data` og `tests`.
 **3: Start appen fra terminal (enten inde i VScode eller terminal på com.):**
 
 ```bash
-python -m shiny run --reload app/app.py
+python3 -m shiny run --reload app/app.py
 ```
 
 `--reload` betyder, at appen starter forfra af sig selv, hver gang I gemmer en fil.
